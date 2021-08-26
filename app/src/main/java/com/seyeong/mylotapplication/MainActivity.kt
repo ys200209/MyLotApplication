@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        binding.button.setOnClickListener {
+        /*binding.button.setOnClickListener {
             try {
                 CoroutineScope(Dispatchers.IO).launch {
                     val url = URL(address)
@@ -65,8 +65,7 @@ class MainActivity : AppCompatActivity() {
                 e.printStackTrace()
             }
 
-
-        }
+        }*/
     }
 
 }
