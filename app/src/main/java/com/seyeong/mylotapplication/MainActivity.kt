@@ -23,6 +23,8 @@ class MainActivity : AppCompatActivity() {
     var jsonObject = JSONObject()
     var drwNo: Int = 0
     val imageList = mutableListOf<Bitmap>()
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -36,30 +38,32 @@ class MainActivity : AppCompatActivity() {
         Log.d("태그", "시작...")
         var adapter = CustomAdapter(this)
 
+        try {
+            CoroutineScope(Dispatchers.Main).launch {
+                val lottoData: MutableList<Lotto> = loadLotto()
 
-        CoroutineScope(Dispatchers.Default).async {
-            val lottoData = async {
-                loadLotto()
-            }
-            if (lottoData.await().get(0) != null) {
-
-                adapter.lot_list = lottoData.await()
+                adapter.lot_list = lottoData
 
                 Log.d("태그", "adapter 생성.")
                 binding.recyclerView.adapter = adapter
                 Log.d("태그", "어댑터 연결.")
                 binding.recyclerView.layoutManager = LinearLayoutManager(binding.root.context)
                 Log.d("태그", "LayoutManager 설정.")
-            }
 
+
+            }
+        } catch ( e: Exception ) {
+            Log.d("태그", "(onCreate) Error : ${e.message}")
+            e.printStackTrace()
         }
+
         /*binding.button.setOnClickListener {
 
 
         }*/
     }
 
-    fun loadLotto(): MutableList<Lotto> {
+    suspend fun loadLotto(): MutableList<Lotto> {
         val data: MutableList<Lotto> = mutableListOf()
 
         try {
