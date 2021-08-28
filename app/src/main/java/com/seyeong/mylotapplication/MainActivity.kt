@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.ArrayAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.seyeong.mylotapplication.databinding.ActivityMainBinding
 import kotlinx.coroutines.*
@@ -29,6 +30,8 @@ class MainActivity : AppCompatActivity() {
     var adapter = CustomAdapter()
     var randomLottoList = mutableListOf<Int>()
     var randomData: MutableList<LottoNumber> = mutableListOf()
+    var menu = listOf("당첨번호 확인하기", "랜덤 추첨하기", "후원하기")
+    var menu_adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, menu)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,7 +56,7 @@ class MainActivity : AppCompatActivity() {
         //val lottoData: MutableList<Lotto> = loadLotto()
         Log.d("태그", "(MainActivity) imageList.size = ${imageList.size}")
         adapter.imageList = imageList
-        loadLotto()
+        //loadLotto()
 
         binding.button.setOnClickListener {
             randomLotto()
@@ -61,7 +64,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun loadLotto() {
+    /*fun loadLotto() {
 
         try {
             CoroutineScope(Dispatchers.IO).launch {
@@ -133,7 +136,7 @@ class MainActivity : AppCompatActivity() {
             e.printStackTrace()
         }
 
-    }
+    }*/
 
     fun randomLotto(){
         randomLottoList.clear()
