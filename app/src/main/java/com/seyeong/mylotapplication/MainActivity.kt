@@ -37,11 +37,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        /*for( i in 1..45) {
+        /*
+        for( i in 1..45) {
             var bmp : Int = this.resources.getIdentifier("lot_"+i, "drawable", "com.seyeong.mylotapplication")
             var bitmap:Bitmap = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(this.resources, bmp), 38,45, false)
             imageList.add(bitmap)
-        }*/
+        }
+        */
 
         for (i in 1..45) {
             imageList.add(this.resources.getIdentifier("lot_"+i, "drawable", "com.seyeong.mylotapplication"))
@@ -57,6 +59,9 @@ class MainActivity : AppCompatActivity() {
         Log.d("태그", "(MainActivity) imageList.size = ${imageList.size}")
         adapter.imageList = imageList
         //loadLotto()
+
+        binding.menuRecyclerView.adapter = menu_adapter
+        binding.menuRecyclerView.layoutManager = LinearLayoutManager(binding.root.context)
 
         binding.button.setOnClickListener {
             randomLotto()
