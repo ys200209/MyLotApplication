@@ -11,8 +11,8 @@ import androidx.core.content.pm.PackageInfoCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.seyeong.mylotapplication.databinding.ItemRecyclerBinding
 
-class CustomAdapter(val context: Context): RecyclerView.Adapter<CustomAdapter.Holder>()  {
-    val imageList = MainActivity().imageList
+class CustomAdapter(): RecyclerView.Adapter<CustomAdapter.Holder>()  {
+    var imageList = mutableListOf<Int>()
     var lot_list = mutableListOf<Lotto>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
@@ -46,13 +46,14 @@ class CustomAdapter(val context: Context): RecyclerView.Adapter<CustomAdapter.Ho
     inner class Holder(val binding: ItemRecyclerBinding): RecyclerView.ViewHolder(binding.root) {
 
         fun setLotto(lotto: Lotto) {
-            binding.number1.setImageBitmap(imageList.get(0))
-            binding.number2.setImageBitmap(imageList.get(1))
-            binding.number3.setImageBitmap(imageList.get(2))
-            binding.number4.setImageBitmap(imageList.get(3))
-            binding.number5.setImageBitmap(imageList.get(4))
-            binding.number6.setImageBitmap(imageList.get(5))
-            binding.bonusNumber.setImageBitmap(imageList.get(6))
+            Log.d("태그", "imageList.size = ${imageList.size}")
+            binding.number1.setImageResource(imageList.get(5))
+            binding.number2.setImageResource(imageList.get(31))
+            binding.number3.setImageResource(imageList.get(17))
+            binding.number4.setImageResource(imageList.get(28))
+            binding.number5.setImageResource(imageList.get(34))
+            binding.number6.setImageResource(imageList.get(41))
+            binding.bonusNumber.setImageResource(imageList.get(36))
             Log.d("태그", "Holder.setLotto 메서드 종료")
         }
 

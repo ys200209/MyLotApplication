@@ -22,85 +22,60 @@ class MainActivity : AppCompatActivity() {
     var jsonArray = JSONArray()
     var jsonObject = JSONObject()
     var drwNo: Int = 0
-    val imageList = mutableListOf<Bitmap>()
-
+    //val imageList = mutableListOf<Bitmap>()
+    val imageList = mutableListOf<Int>()
+    val data: MutableList<Lotto> = mutableListOf()
+    var adapter = CustomAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        for( i in 1..45) {
+        /*for( i in 1..45) {
             var bmp : Int = this.resources.getIdentifier("lot_"+i, "drawable", "com.seyeong.mylotapplication")
             var bitmap:Bitmap = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(this.resources, bmp), 38,45, false)
             imageList.add(bitmap)
+        }*/
+
+        for (i in 1..45) {
+            imageList.add(this.resources.getIdentifier("lot_"+i, "drawable", "com.seyeong.mylotapplication"))
         }
 
         Log.d("태그", "시작...")
-        var adapter = CustomAdapter(this)
 
-        try {
-            CoroutineScope(Dispatchers.Main).launch {
-                val lottoData: MutableList<Lotto> = loadLotto()
-
-                adapter.lot_list = lottoData
-
-                Log.d("태그", "adapter 생성.")
-                binding.recyclerView.adapter = adapter
-                Log.d("태그", "어댑터 연결.")
-                binding.recyclerView.layoutManager = LinearLayoutManager(binding.root.context)
-                Log.d("태그", "LayoutManager 설정.")
+        val a: Int = R.drawable.lot_38
 
 
-            }
-        } catch ( e: Exception ) {
-            Log.d("태그", "(onCreate) Error : ${e.message}")
-            e.printStackTrace()
-        }
 
-        /*binding.button.setOnClickListener {
+        //val lottoData: MutableList<Lotto> = loadLotto()
+        Log.d("태그", "(MainActivity) imageList.size = ${imageList.size}")
+        binding.imageView2.setImageResource(imageList.get(37))
+        adapter.imageList = imageList
+        loadLotto()
 
-
-        }*/
     }
 
-    suspend fun loadLotto(): MutableList<Lotto> {
-        val data: MutableList<Lotto> = mutableListOf()
+    fun loadLotto() {
 
         try {
-            CoroutineScope(Dispatchers.Default).async {
+            CoroutineScope(Dispatchers.IO).launch {
                 val url = URL(address)
                 val urlConnection = url.openConnection() as HttpURLConnection
-                val asyncStr = async {
-                    if (urlConnection.responseCode == HttpURLConnection.HTTP_OK) {
-                        val streamReader = InputStreamReader(urlConnection.inputStream)
-                        val buffered = BufferedReader(streamReader)
+                if (urlConnection.responseCode == HttpURLConnection.HTTP_OK) {
+                    val streamReader = InputStreamReader(urlConnection.inputStream)
+                    val buffered = BufferedReader(streamReader)
 
-                        while (true) {
-                            var line = buffered.readLine() ?: break
-                            str.append(line)
-                        }
-                        buffered.close()
-                        urlConnection.disconnect()
-
-                        str
-                    } else {
-                        null
+                    while (true) {
+                        var line = buffered.readLine() ?: break
+                        str.append(line)
                     }
+                    buffered.close()
+                    urlConnection.disconnect()
+
                 }
-                Log.d("태그", "asyncStr = ${asyncStr.await()}")
+                Log.d("태그", "str = ${str}")
 
-                /*launch(Dispatchers.Main) {
-                    /*
-                    binding.textView.text = str.toString()
-                    binding.textView2.text = "${jsonObject.getInt("drwNo")}회\n" +
-                            "${jsonObject.getInt("drwtNo1")}, ${jsonObject.getInt("drwtNo2")}, " +
-                            "${jsonObject.getInt("drwtNo3")}, ${jsonObject.getInt("drwtNo4")}, " +
-                            "${jsonObject.getInt("drwtNo5")}, ${jsonObject.getInt("drwtNo6")} \n" +
-                            "${jsonObject.getInt("firstWinamnt")}원"*/
-
-                }*/
-
-                if ( asyncStr.await() != null) {
+                launch(Dispatchers.Main) {
                     Log.d("태그", "data.add( Lotto(...) )")
 
                     jsonArray = JSONArray("[${str}]")
@@ -125,18 +100,22 @@ class MainActivity : AppCompatActivity() {
 
                     Log.d("태그", "data = ${data.toString()}")
                     Log.d("태그", "data = ${data.size}")
-                }
 
+
+                    adapter.lot_list = data
+
+                    Log.d("태그", "adapter 생성.")
+                    binding.recyclerView.adapter = adapter
+                    Log.d("태그", "어댑터 연결.")
+                    binding.recyclerView.layoutManager = LinearLayoutManager(binding.root.context)
+                    Log.d("태그", "LayoutManager 설정.")
+
+                }
             }
         } catch (e: Exception) {
-            Log.d("태그", "Error : $e")
+            Log.d("태그", "Error! : ${e.message}")
             e.printStackTrace()
         }
-
-        return data
-    }
-
-    suspend fun jsonConnect() {
 
     }
 
