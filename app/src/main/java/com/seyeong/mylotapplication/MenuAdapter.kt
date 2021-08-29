@@ -25,7 +25,14 @@ class MenuAdapter: RecyclerView.Adapter<MenuAdapter.Holder>() {
     }
 
     inner class Holder(val binding: MenuRecyclerBinding): RecyclerView.ViewHolder(binding.root) {
-
+        init {
+            binding.root.setOnClickListener {
+                when(binding.menuText.text) {
+                    "당첨번호 확인하기" -> 
+                        "랜덤 추첨하기", "후원하기", "롤하러 가기", "캐리하기"
+                }
+            }
+        }
         fun setMenu(menu: String, pos: Int) {
             binding.menuText.text = menuList.get(pos)
         }
