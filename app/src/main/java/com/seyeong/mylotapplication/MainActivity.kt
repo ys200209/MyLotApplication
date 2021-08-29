@@ -30,8 +30,8 @@ class MainActivity : AppCompatActivity() {
     var adapter = CustomAdapter()
     var randomLottoList = mutableListOf<Int>()
     var randomData: MutableList<LottoNumber> = mutableListOf()
-    var menu = listOf("당첨번호 확인하기", "랜덤 추첨하기", "후원하기")
-    var menu_adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, menu)
+    var menu:MutableList<String> = mutableListOf("당첨번호 확인하기", "랜덤 추첨하기", "후원하기", "롤하러 가기", "캐리하기")
+    var menu_adapter = MenuAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,6 +60,7 @@ class MainActivity : AppCompatActivity() {
         adapter.imageList = imageList
         //loadLotto()
 
+        menu_adapter.menuList = menu
         binding.menuRecyclerView.adapter = menu_adapter
         binding.menuRecyclerView.layoutManager = LinearLayoutManager(binding.root.context)
 
