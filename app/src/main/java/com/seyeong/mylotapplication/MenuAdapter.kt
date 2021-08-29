@@ -1,7 +1,10 @@
 package com.seyeong.mylotapplication
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.seyeong.mylotapplication.databinding.ItemRecyclerBinding
 import com.seyeong.mylotapplication.databinding.MenuRecyclerBinding
@@ -28,8 +31,25 @@ class MenuAdapter: RecyclerView.Adapter<MenuAdapter.Holder>() {
         init {
             binding.root.setOnClickListener {
                 when(binding.menuText.text) {
-                    "당첨번호 확인하기" -> 
-                        "랜덤 추첨하기", "후원하기", "롤하러 가기", "캐리하기"
+                    "당첨번호 확인하기" ->  {
+                        val intent = Intent(binding.root?.context, ShowNumber::class.java)
+                        startActivity(binding.root.context, intent, null)
+                    }
+                    "랜덤 추첨하기" -> {
+                        
+                    }
+                    "후원하기" -> {
+                        val intent = Intent(binding.root?.context, ShowNumber::class.java)
+                        startActivity(binding.root.context, intent, null)
+                    }
+                    "롤하러 가기" -> {
+                        val intent = Intent(binding.root?.context, ShowNumber::class.java)
+                        startActivity(binding.root.context, intent, null)
+                    }
+                    "캐리하기" -> {
+                        val intent = Intent(binding.root?.context, ShowNumber::class.java)
+                        startActivity(binding.root.context, intent, null)
+                    }
                 }
             }
         }
