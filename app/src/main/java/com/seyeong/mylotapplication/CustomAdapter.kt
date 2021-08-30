@@ -42,7 +42,7 @@ class CustomAdapter(): RecyclerView.Adapter<CustomAdapter.Holder>()  {
     inner class Holder(val binding: ItemRecyclerBinding): RecyclerView.ViewHolder(binding.root) {
 
         fun setLotto(lotto: LottoNumber) {
-            Log.d("태그", "imageList.size = ${imageList.size}")
+            Log.d("태그", "(CustomAdapter) imageList.size = ${imageList.size}")
             // 977 회차 로또 번호
             binding.number1.setImageResource(imageList.get(lotto.drwtNo1-1))
             binding.number2.setImageResource(imageList.get(lotto.drwtNo2-1))

@@ -1,5 +1,6 @@
 package com.seyeong.mylotapplication
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -25,10 +26,17 @@ class ShowNumber : AppCompatActivity() {
     val data: MutableList<Lotto> = mutableListOf()
     val binding by lazy { ActivityShowNumberBinding.inflate(layoutInflater) }
     var adapter = CustomAdapter()
+    val main_activity = MainActivity()
+    var imageList = mutableListOf<Int>()
+    // var intent = getIntent()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
+        imageList = intent.getIntegerArrayListExtra("imageList") as MutableList<Int>
+
+        loadLotto()
     }
 
     fun loadLotto() {
@@ -84,10 +92,11 @@ class ShowNumber : AppCompatActivity() {
                         )
                     )*/
 
-                    Log.d("태그", "data = ${data.toString()}")
-                    Log.d("태그", "data = ${data.size}")
+                    Log.d("태그", "randomData = ${randomData.toString()}")
+                    Log.d("태그", "randomData = ${randomData.size}")
 
-
+                    Log.d("태그", "(ShowNumber) imageList.size = ${imageList.size}")
+                    adapter.imageList = imageList
                     adapter.lot_list = randomData
 
                     Log.d("태그", "adapter 생성.")

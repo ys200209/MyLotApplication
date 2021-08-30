@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
     var randomLottoList = mutableListOf<Int>()
     var menu:MutableList<String> = mutableListOf("당첨번호 확인하기", "랜덤 추첨하기", "후원하기", "롤하러 가기", "캐리하기")
     var menu_adapter = MenuAdapter()
-    var adapter = CustomAdapter()
+    // var adapter = CustomAdapter()
     var randomData: MutableList<LottoNumber> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,21 +52,21 @@ class MainActivity : AppCompatActivity() {
 
         //val lottoData: MutableList<Lotto> = loadLotto()
         Log.d("태그", "(MainActivity) imageList.size = ${imageList.size}")
-        adapter.imageList = imageList
+        menu_adapter.imageList = imageList
         //loadLotto()
 
         menu_adapter.menuList = menu
         binding.menuRecyclerView.adapter = menu_adapter
         binding.menuRecyclerView.layoutManager = LinearLayoutManager(binding.root.context)
 
-        binding.button.setOnClickListener {
+        /*binding.button.setOnClickListener {
             randomLotto()
-        }
+        }*/
 
     }
 
 
-
+/*
     fun randomLotto(){
         randomLottoList.clear()
         val random = Random()
@@ -93,6 +93,6 @@ class MainActivity : AppCompatActivity() {
         binding.random6.setImageResource(imageList.get(randomLottoList.get(5)-1))
         binding.bonusRandom.setImageResource(imageList.get(randomLottoList.get(6)-1))
     }
-
+*/
 }
 
