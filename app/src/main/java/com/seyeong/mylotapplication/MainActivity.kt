@@ -22,11 +22,11 @@ class MainActivity : AppCompatActivity() {
     val binding by lazy { ActivityMainBinding.inflate(layoutInflater)}
     //val imageList = mutableListOf<Bitmap>()
     val imageList = mutableListOf<Int>()
-    var randomLottoList = mutableListOf<Int>()
+
     var menu:MutableList<String> = mutableListOf("당첨번호 확인하기", "랜덤 추첨하기", "후원하기", "롤하러 가기", "캐리하기")
     var menu_adapter = MenuAdapter()
     // var adapter = CustomAdapter()
-    var randomData: MutableList<LottoNumber> = mutableListOf()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,32 +67,7 @@ class MainActivity : AppCompatActivity() {
 
 
 /*
-    fun randomLotto(){
-        randomLottoList.clear()
-        val random = Random()
-        while (true) {
-            var number = random.nextInt(45) + 1
-            if ( !randomLottoList.contains(number) ) {
-                randomLottoList.add(number)
-            }
-            if (randomLottoList.size == 7) {
-                break
-            }
-        }
 
-        randomData.add(LottoNumber(randomLottoList.get(0), randomLottoList.get(1), randomLottoList.get(2),
-            randomLottoList.get(3), randomLottoList.get(4), randomLottoList.get(5), randomLottoList.get(6)))
-        adapter.notifyDataSetChanged()
-
-        Log.d("태그", "randomLottoList.toString = ${randomLottoList.toString()}")
-        binding.random1.setImageResource(imageList.get(randomLottoList.get(0)-1))
-        binding.random2.setImageResource(imageList.get(randomLottoList.get(1)-1))
-        binding.random3.setImageResource(imageList.get(randomLottoList.get(2)-1))
-        binding.random4.setImageResource(imageList.get(randomLottoList.get(3)-1))
-        binding.random5.setImageResource(imageList.get(randomLottoList.get(4)-1))
-        binding.random6.setImageResource(imageList.get(randomLottoList.get(5)-1))
-        binding.bonusRandom.setImageResource(imageList.get(randomLottoList.get(6)-1))
-    }
 */
 }
 

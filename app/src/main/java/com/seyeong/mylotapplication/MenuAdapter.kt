@@ -35,16 +35,13 @@ class MenuAdapter: RecyclerView.Adapter<MenuAdapter.Holder>() {
                 when(binding.menuText.text) {
                     "당첨번호 확인하기" ->  {
                         val intent = Intent(binding.root?.context, ShowNumber::class.java)
-                        /*val adapter = CustomAdapter()
-
-                        adapter.imageList = imageList
-                        Log.d("태그", "(MenuAdapter) imageList.size = ${imageList.size}")
-                        Log.d("태그", "(MenuAdapter) adapter.imageList.size = ${adapter.imageList.size}")*/
                         intent.putIntegerArrayListExtra("imageList", ArrayList(imageList))
                         startActivity(binding.root.context, intent, null)
                     }
                     "랜덤 추첨하기" -> {
-
+                        val intent = Intent(binding.root.context, SelectLotto::class.java)
+                        intent.putIntegerArrayListExtra("imageList", ArrayList(imageList))
+                        startActivity(binding.root.context, intent, null)
                     }
                     "후원하기" -> {
                         val intent = Intent(binding.root?.context, ShowNumber::class.java)

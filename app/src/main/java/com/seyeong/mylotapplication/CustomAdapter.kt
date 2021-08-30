@@ -33,8 +33,6 @@ class CustomAdapter(): RecyclerView.Adapter<CustomAdapter.Holder>()  {
 
         val lotto = lot_list.get(position) // 아직 아무것도 안넣었는데 뭔 .get ?
 
-        holder
-
         Log.d("태그", "(onBindViewHolder) setLotto 메서드 호출.")
         holder.setLotto(lotto)
     }
